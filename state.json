@@ -1,17 +1,17 @@
 {
   "date": "2026-11-07",
-  "updated_at": "2026-11-07T15:31:22.505939+05:30",
+  "updated_at": "2026-11-07T15:44:22.494375+05:30",
   "problem": {
     "id": "1882",
     "title": "Process Tasks Using Servers",
     "title_slug": "process-tasks-using-servers",
     "difficulty": "Medium",
     "link": "https://leetcode.com/problems/process-tasks-using-servers/",
-    "summary": "You are given two 0-indexed integer arrays `servers` and `tasks` of lengths `n`\u200b\u200b\u200b\u200b\u200b\u200b and `m`\u200b\u200b\u200b\u200b\u200b\u200b respectively. `servers[i]` is the weight of the `i\u200b\u200b\u200b\u200b\u200b\u200bth`\u200b\u200b\u200b\u200b server, and `tasks[j]` is the time needed to process the `j\u200b\u200b\u200b\u200b\u200b\u200bth`\u200b\u200b\u200b\u200b task in seconds.\nTasks are assigned to the servers using a task queue. Initially, all servers are free, and the queue is empty.\nAt second `j`, the `jth` task is in..."
+    "summary": "You are given two 0-indexed integer arrays `servers` and `tasks` of lengths `n`​​​​​​ and `m`​​​​​​ respectively. `servers[i]` is the weight of the `i​​​​​​th`​​​​ server, and `tasks[j]` is the time needed to process the `j​​​​​​th`​​​​ task in seconds.\nTasks are assigned to the servers using a task queue. Initially, all servers are free, and the queue is empty.\nAt second `j`, the `jth` task is in..."
   },
   "sent_history": {
-    "morning": null,
-    "evening": null
+    "morning": "2026-11-07T15:44:22.496561+05:30",
+    "evening": "2026-11-07T15:44:31.918409+05:30"
   },
   "solution": {
     "approach": "Maintain two min-heaps: one for available servers sorted by (weight, index), and another for busy servers sorted by (free_time, weight, index). Advance time to process each task chronologically.",

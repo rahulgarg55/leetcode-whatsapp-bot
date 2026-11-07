@@ -61,6 +61,23 @@ def get_current_date_ist() -> str:
     return datetime.now(IST).strftime("%Y-%m-%d")
 
 
+def write_github_step_summary(header: str, contents: list[str] | str) -> None:
+    """Appends markdown summary to GitHub Actions Step Summary if running in CI."""
+    summary_file = os.getenv("GITHUB_STEP_SUMMARY")
+    if not summary_file:
+        return
+    try:
+        with open(summary_file, "a", encoding="utf-8") as f:
+            f.write(f"\n## {header}\n\n")
+            if isinstance(contents, list):
+                for c in contents:
+                    f.write(f"{c}\n\n---\n\n")
+            else:
+                f.write(f"{contents}\n\n")
+    except Exception as err:
+        logger.warning("Could not write to GITHUB_STEP_SUMMARY: %s", err)
+
+
 def run_morning_mode(
     dry_run: bool,
     force: bool,
@@ -97,7 +114,10 @@ def run_morning_mode(
     # 5. Format message(s)
     messages = format_morning_messages(problem, solution)
 
-    # 6. Send or Dry-Run Print
+    # 6. Append to GitHub Actions Step Summary if in CI
+    write_github_step_summary(f"☀️ LeetCode Morning Dispatch ({today_str})", messages)
+
+    # 7. Send or Dry-Run Print
     if dry_run:
         print("\n" + "=" * 60)
         print(" [DRY RUN] MORNING WHATSAPP MESSAGE DISPATCH")
@@ -172,7 +192,10 @@ def run_evening_mode(
     # 4. Format evening reminder
     message = format_evening_message(problem_obj, hint_text)
 
-    # 5. Send or Dry-Run Print
+    # 5. Append to GitHub Actions Step Summary if in CI
+    write_github_step_summary(f"🔔 LeetCode Evening Reminder ({today_str})", message)
+
+    # 6. Send or Dry-Run Print
     if dry_run:
         print("\n" + "=" * 60)
         print(" [DRY RUN] EVENING WHATSAPP REMINDER DISPATCH")
