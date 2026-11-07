@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-07",
+  "updated_at": "2026-11-07T15:31:22.505939+05:30",
+  "problem": {
+    "id": "1882",
+    "title": "Process Tasks Using Servers",
+    "title_slug": "process-tasks-using-servers",
+    "difficulty": "Medium",
+    "link": "https://leetcode.com/problems/process-tasks-using-servers/",
+    "summary": "You are given two 0-indexed integer arrays `servers` and `tasks` of lengths `n`\u200b\u200b\u200b\u200b\u200b\u200b and `m`\u200b\u200b\u200b\u200b\u200b\u200b respectively. `servers[i]` is the weight of the `i\u200b\u200b\u200b\u200b\u200b\u200bth`\u200b\u200b\u200b\u200b server, and `tasks[j]` is the time needed to process the `j\u200b\u200b\u200b\u200b\u200b\u200bth`\u200b\u200b\u200b\u200b task in seconds.\nTasks are assigned to the servers using a task queue. Initially, all servers are free, and the queue is empty.\nAt second `j`, the `jth` task is in..."
+  },
+  "sent_history": {
+    "morning": null,
+    "evening": null
+  },
+  "solution": {
+    "approach": "Maintain two min-heaps: one for available servers sorted by (weight, index), and another for busy servers sorted by (free_time, weight, index). Advance time to process each task chronologically.",
+    "time_complexity": "O((m + n) log n)",
+    "space_complexity": "O(n + m)",
+    "code": "import heapq\n\nclass Solution:\n    def assignTasks(self, servers: list[int], tasks: list[int]) -> list[int]:\n        # Two priority queues: free servers (weight, index) and busy servers (available_time, weight, index)\n        free = [(w, i) for i, w in enumerate(servers)]\n        heapq.heapify(free)\n        busy = []\n        ans = []\n        time = 0\n        \n        for i, task_time in enumerate(tasks):\n            time = max(time, i)\n            # If no free servers, jump time forward to next available server\n            if not free and busy and busy[0][0] > time:\n                time = busy[0][0]\n                \n            while busy and busy[0][0] <= time:\n                _, weight, idx = heapq.heappop(busy)\n                heapq.heappush(free, (weight, idx))\n                \n            weight, idx = heapq.heappop(free)\n            ans.append(idx)\n            heapq.heappush(busy, (time + task_time, weight, idx))\n            \n        return ans\n",
+    "verified": true,
+    "attempts": 1,
+    "verification_notes": "Passed all 2 verified example test cases.",
+    "hint": "Use two priority queues to separate available servers from busy ones and advance time when idle."
+  }
+}

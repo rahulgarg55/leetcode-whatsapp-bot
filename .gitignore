@@ -1,0 +1,18 @@
+# Secrets
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# State (if you prefer GitHub Action cache or repo commit, keep local test files ignored)
+# Note: state.json is created dynamically; keep state.json tracked or ignored based on choice
+.DS_Store
+*.log

@@ -1,0 +1,106 @@
+name: Daily LeetCode WhatsApp Dispatcher
+
+on:
+  schedule:
+    # 10:30 AM IST = 05:00 UTC (Morning Solution)
+    - cron: '0 5 * * *'
+    # 06:30 PM IST = 13:00 UTC (Evening Reminder)
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Execution Mode'
+        required: true
+        type: choice
+        options:
+          - morning
+          - evening
+        default: morning
+      dry_run:
+        description: 'Dry Run (Test without sending WhatsApp message)'
+        required: false
+        type: boolean
+        default: false
+      force:
+        description: 'Force dispatch (bypass duplicate protection)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Determine Execution Mode
+        id: select_mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> $GITHUB_OUTPUT
+            if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+              echo "dry_run_flag=--dry-run" >> $GITHUB_OUTPUT
+            else
+              echo "dry_run_flag=" >> $GITHUB_OUTPUT
+            fi
+            if [ "${{ github.event.inputs.force }}" = "true" ]; then
+              echo "force_flag=--force" >> $GITHUB_OUTPUT
+            else
+              echo "force_flag=" >> $GITHUB_OUTPUT
+            fi
+          elif [ "${{ github.event.schedule }}" = "0 5 * * *" ]; then
+            echo "mode=morning" >> $GITHUB_OUTPUT
+            echo "dry_run_flag=" >> $GITHUB_OUTPUT
+            echo "force_flag=" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 13 * * *" ]; then
+            echo "mode=evening" >> $GITHUB_OUTPUT
+            echo "dry_run_flag=" >> $GITHUB_OUTPUT
+            echo "force_flag=" >> $GITHUB_OUTPUT
+          else
+            echo "mode=morning" >> $GITHUB_OUTPUT
+            echo "dry_run_flag=" >> $GITHUB_OUTPUT
+            echo "force_flag=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run LeetCode Bot
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER || 'gemini' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          TWILIO_WHATSAPP_NUMBER: ${{ secrets.TWILIO_WHATSAPP_NUMBER || 'whatsapp:+14155238886' }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER || 'whatsapp:+917807221279' }}
+        run: |
+          python main.py --mode ${{ steps.select_mode.outputs.mode }} ${{ steps.select_mode.outputs.dry_run_flag }} ${{ steps.select_mode.outputs.force_flag }}
+
+      - name: Commit and Push Updated State
+        if: ${{ steps.select_mode.outputs.dry_run_flag == '' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state.json || true
+          if git diff --staged --quiet; then
+            echo "No state changes to commit."
+          else
+            git commit -m "chore: update daily leetcode state [skip ci]"
+            git push
+          fi
