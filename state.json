@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-09",
-  "updated_at": "2026-11-09T19:08:05.557704+05:30",
+  "date": "2026-11-10",
+  "updated_at": "2026-11-10T04:25:40.556679+05:30",
   "problem": {
     "id": "1606",
     "title": "Find Servers That Handled Most Number of Requests",
@@ -10,17 +10,10 @@
     "summary": "You have `k` servers numbered from `0` to `k-1` that are being used to handle multiple requests simultaneously. Each server has infinite computational capacity but cannot handle more than one request at a time. The requests are assigned to servers according to a specific algorithm:"
   },
   "sent_history": {
-    "morning": "2026-11-09T19:08:05.558361+05:30",
-    "evening": null
+    "morning": null,
+    "evening": "2026-11-10T04:25:40.557523+05:30"
   },
   "solution": {
-    "approach": "Analyzed problem constraints and identified optimal greedy/heap simulation strategy.",
-    "time_complexity": "O(N log N)",
-    "space_complexity": "O(N)",
-    "code": "class Solution:\n    def busiestServers(self, k: int, arrival: list[int], load: list[int]) -> list[int]:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
-    "verified": false,
-    "attempts": 1,
-    "verification_notes": "Example 1 Failed:\nInput: k = 3, arrival = [1,2,3,4,5], load = [5,2,3,3,3]\nExpected: [1]\nActual:   []",
-    "hint": "Think about whether a min-heap or two-pointer approach reduces the search space."
+    "hint": "To speed up the next available server search, keep track of the available servers in a sorted structure such as an ordered set."
   }
 }
