@@ -1,26 +1,26 @@
 {
-  "date": "2026-11-08",
-  "updated_at": "2026-11-08T17:12:04.166834+05:30",
+  "date": "2026-11-09",
+  "updated_at": "2026-11-09T19:08:05.557704+05:30",
   "problem": {
-    "id": "1267",
-    "title": "Count Servers that Communicate",
-    "title_slug": "count-servers-that-communicate",
-    "difficulty": "Medium",
-    "link": "https://leetcode.com/problems/count-servers-that-communicate/",
-    "summary": "You are given a map of a server center, represented as a `m * n` integer matrix `grid`, where 1 means that on that cell there is a server and 0 means that it is no server. Two servers are said to communicate if they are on the same row or on the same column."
+    "id": "1606",
+    "title": "Find Servers That Handled Most Number of Requests",
+    "title_slug": "find-servers-that-handled-most-number-of-requests",
+    "difficulty": "Hard",
+    "link": "https://leetcode.com/problems/find-servers-that-handled-most-number-of-requests/",
+    "summary": "You have `k` servers numbered from `0` to `k-1` that are being used to handle multiple requests simultaneously. Each server has infinite computational capacity but cannot handle more than one request at a time. The requests are assigned to servers according to a specific algorithm:"
   },
   "sent_history": {
-    "morning": "2026-11-08T17:12:04.167635+05:30",
-    "evening": "2026-11-08T23:46:27.303781+05:30"
+    "morning": "2026-11-09T19:08:05.558361+05:30",
+    "evening": null
   },
   "solution": {
     "approach": "Analyzed problem constraints and identified optimal greedy/heap simulation strategy.",
     "time_complexity": "O(N log N)",
     "space_complexity": "O(N)",
-    "code": "class Solution:\n    def countServers(self, grid: list[list[int]]) -> int:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
+    "code": "class Solution:\n    def busiestServers(self, k: int, arrival: list[int], load: list[int]) -> list[int]:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
     "verified": false,
     "attempts": 1,
-    "verification_notes": "Example 1 Failed:\nInput: grid = [[1,0],[0,1]]\nExpected: 0\nActual:   []",
+    "verification_notes": "Example 1 Failed:\nInput: k = 3, arrival = [1,2,3,4,5], load = [5,2,3,3,3]\nExpected: [1]\nActual:   []",
     "hint": "Think about whether a min-heap or two-pointer approach reduces the search space."
   }
 }
