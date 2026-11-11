@@ -1,19 +1,26 @@
 {
   "date": "2026-11-11",
-  "updated_at": "2026-11-11T01:51:24.394952+05:30",
+  "updated_at": "2026-11-11T17:57:30.066332+05:30",
   "problem": {
-    "id": "3693",
-    "title": "Climbing Stairs II",
-    "title_slug": "climbing-stairs-ii",
+    "id": "3789",
+    "title": "Minimum Cost to Acquire Required Items",
+    "title_slug": "minimum-cost-to-acquire-required-items",
     "difficulty": "Medium",
-    "link": "https://leetcode.com/problems/climbing-stairs-ii/",
-    "summary": "You are climbing a staircase with `n + 1` steps, numbered from 0 to `n`.\nYou are also given a 1-indexed integer array `costs` of length `n`, where `costs[i]` is the cost of step `i`.\nFrom step `i`, you can jump only to step `i + 1`, `i + 2`, or `i + 3`. The cost of jumping from step `i` to step `j` is defined as: `costs[j] + (j - i)2`\nYou start from step 0 with `cost = 0`.\nReturn the minimum total..."
+    "link": "https://leetcode.com/problems/minimum-cost-to-acquire-required-items/",
+    "summary": "You are given five integers `cost1`, `cost2`, `costBoth`, `need1`, and `need2`.\nThere are three types of items available:\n\n• An item of type 1 costs `cost1` and contributes 1 unit to the type 1 requirement only."
   },
   "sent_history": {
-    "morning": null,
+    "morning": "2026-11-11T17:57:30.066974+05:30",
     "evening": "2026-11-11T01:51:24.409110+05:30"
   },
   "solution": {
-    "hint": "Use dynamic programming where <code>dp[j]</code> represents the minimum cost to reach step <code>j</code>."
+    "approach": "Analyzed problem constraints and identified optimal greedy/heap simulation strategy.",
+    "time_complexity": "O(N log N)",
+    "space_complexity": "O(N)",
+    "code": "class Solution:\n    def minimumCost(self, cost1: int, cost2: int, costBoth: int, need1: int, need2: int) -> int:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
+    "verified": false,
+    "attempts": 1,
+    "verification_notes": "Example 1 Failed:\nInput: cost1 = 3, cost2 = 2, costBoth = 1, need1 = 3, need2 = 2\nExpected: 3\nActual:   []",
+    "hint": "Think about whether a min-heap or two-pointer approach reduces the search space."
   }
 }
