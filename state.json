@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-11",
-  "updated_at": "2026-11-11T17:57:30.066332+05:30",
+  "date": "2026-11-12",
+  "updated_at": "2026-11-12T01:34:18.353694+05:30",
   "problem": {
     "id": "3789",
     "title": "Minimum Cost to Acquire Required Items",
@@ -10,17 +10,10 @@
     "summary": "You are given five integers `cost1`, `cost2`, `costBoth`, `need1`, and `need2`.\nThere are three types of items available:\n\n• An item of type 1 costs `cost1` and contributes 1 unit to the type 1 requirement only."
   },
   "sent_history": {
-    "morning": "2026-11-11T17:57:30.066974+05:30",
-    "evening": "2026-11-11T01:51:24.409110+05:30"
+    "morning": null,
+    "evening": "2026-11-12T01:34:18.354543+05:30"
   },
   "solution": {
-    "approach": "Analyzed problem constraints and identified optimal greedy/heap simulation strategy.",
-    "time_complexity": "O(N log N)",
-    "space_complexity": "O(N)",
-    "code": "class Solution:\n    def minimumCost(self, cost1: int, cost2: int, costBoth: int, need1: int, need2: int) -> int:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
-    "verified": false,
-    "attempts": 1,
-    "verification_notes": "Example 1 Failed:\nInput: cost1 = 3, cost2 = 2, costBoth = 1, need1 = 3, need2 = 2\nExpected: 3\nActual:   []",
-    "hint": "Think about whether a min-heap or two-pointer approach reduces the search space."
+    "hint": "First, use <code>min(costBoth, cost1 + cost2)</code> for <code>min(need1, need2)</code>."
   }
 }
