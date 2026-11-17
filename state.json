@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-17",
-  "updated_at": "2026-11-17T19:37:19.528024+05:30",
+  "date": "2026-11-18",
+  "updated_at": "2026-11-18T03:06:36.114949+05:30",
   "problem": {
     "id": "2911",
     "title": "Minimum Changes to Make K Semi-palindromes",
@@ -10,17 +10,10 @@
     "summary": "Given a string `s` and an integer `k`, partition `s` into `k` substrings such that the letter changes needed to make each substring a semi-palindrome are minimized.\nReturn the minimum number of letter changes required.\nA semi-palindrome is a special type of string that can be divided into palindromes based on a repeating pattern. To check if a string is a semi-palindrome:​"
   },
   "sent_history": {
-    "morning": "2026-11-17T19:37:19.528938+05:30",
-    "evening": "2026-11-17T04:18:27.936236+05:30"
+    "morning": null,
+    "evening": "2026-11-18T03:06:36.115631+05:30"
   },
   "solution": {
-    "approach": "Analyzed problem constraints and identified optimal greedy/heap simulation strategy.",
-    "time_complexity": "O(N log N)",
-    "space_complexity": "O(N)",
-    "code": "class Solution:\n    def minimumChanges(self, s: str, k: int) -> int:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
-    "verified": false,
-    "attempts": 1,
-    "verification_notes": "Example 1 Failed:\nInput: s = \"abcac\", k = 2\nExpected: 1\nActual:   []",
-    "hint": "Think about whether a min-heap or two-pointer approach reduces the search space."
+    "hint": "Define <code>dp[i][j]</code> as the minimum count of letter changes needed to split the suffix of string <code>s</code> starting from <code>s[i]</code> into <code>j</code> valid parts."
   }
 }
