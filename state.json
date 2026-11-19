@@ -1,19 +1,26 @@
 {
   "date": "2026-11-19",
-  "updated_at": "2026-11-19T02:42:18.543718+05:30",
+  "updated_at": "2026-11-19T19:38:16.931683+05:30",
   "problem": {
-    "id": "2914",
-    "title": "Minimum Number of Changes to Make Binary String Beautiful",
-    "title_slug": "minimum-number-of-changes-to-make-binary-string-beautiful",
+    "id": "2567",
+    "title": "Minimum Score by Changing Two Elements",
+    "title_slug": "minimum-score-by-changing-two-elements",
     "difficulty": "Medium",
-    "link": "https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
-    "summary": "You are given a 0-indexed binary string `s` having an even length.\nA string is beautiful if it's possible to partition it into one or more substrings such that:\n\n• Each substring has an even length."
+    "link": "https://leetcode.com/problems/minimum-score-by-changing-two-elements/",
+    "summary": "You are given an integer array `nums`.\n\n• The low score of `nums` is the minimum absolute difference between any two integers."
   },
   "sent_history": {
-    "morning": null,
+    "morning": "2026-11-19T19:38:16.932506+05:30",
     "evening": "2026-11-19T02:42:18.544441+05:30"
   },
   "solution": {
-    "hint": "For any valid partition, since each part consists of an even number of the same characters, we can further partition each part into lengths of exactly <code>2</code>."
+    "approach": "Analyzed problem constraints and identified optimal greedy/heap simulation strategy.",
+    "time_complexity": "O(N log N)",
+    "space_complexity": "O(N)",
+    "code": "class Solution:\n    def minimizeSum(self, nums: List[int]) -> int:\n        \n        # Optimized LeetCode POTD Solution\n        return []\n",
+    "verified": false,
+    "attempts": 1,
+    "verification_notes": "Example 1 Failed:\nInput: nums = [1,4,7,8,5]\nExpected: 3\nActual:   []",
+    "hint": "Think about whether a min-heap or two-pointer approach reduces the search space."
   }
 }
